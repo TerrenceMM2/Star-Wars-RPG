@@ -7,39 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>Coursework #4: Star Wars RPG</title>
 </head>
 
 <body>
-    <h1>Star Wars RPG</h1>
+    <h1>STAR WARS RPG</h1>
 
     <h2>choose your character:</h2>
     <div id="character-selection">
         <div class="image-container">
             <img id="skywalker" src="assets/images/skywalker.jpg" alt="Luke Skywalker">
-            <div class="top-left">Luke Skywalker</div>
-            <div class="bottom-right">HP: 125</div>
+            <div class="name top-left">Luke Skywalker</div>
+            <div class="hp bottom-right">HP: 125</div>
         </div>
         <div class="image-container">
             <img id="darth-vader" src="assets/images/darth_vader.jpg" alt="Darth Vader">
-            <div class="top-left">Darth Vader</div>
-            <div class="bottom-right">HP: 160</div>
+            <div class="name top-left">Darth Vader</div>
+            <div class="hp bottom-right">HP: 160</div>
         </div>
         <div class="image-container">
             <img id="boba-fett" src="assets/images/boba_fett.jpg" alt="Boba Fett">
-            <div class="top-left">Boba Fett</div>
-            <div class="bottom-right">HP: 95</div>
+            <div class="name top-left">Boba Fett</div>
+            <div class="hp bottom-right">HP: 95</div>
         </div>
         <div class="image-container">
-            <img id="tusken raider" src="assets/images/tusken_raider.jpg" alt="Tusken Raider">
-            <div class="top-left">Tusken Raider</div>
-            <div class="bottom-right">HP: 80</div>
+            <img id="tusken-raider" src="assets/images/tusken_raider.jpg" alt="Tusken Raider">
+            <div class="name top-left">Tusken Raider</div>
+            <div class="hp bottom-right">HP: 80</div>
         </div>
     </div>
 
-    <h2>enemies Remaining:</h2>
+    <h2>enemies remaining:</h2>
+    <div id="enemy-selection">
+
+    </div>
 
     <h2>opponent:</h2>
+    <div id="current-opponent">
+
+    </div>
 
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
