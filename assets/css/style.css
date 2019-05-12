@@ -1,0 +1,79 @@
+@font-face {
+    font-family: "starJediHollow";
+    src: url("../fonts/star_jedi_hollow.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "starJedi";
+    src: url("../fonts/star_jedi.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "episode";
+    src: url("../fonts/episode1.ttf") format('truetype');
+}
+
+html {
+    background: url("../images/star_wars_background.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    font-family: "starJedi", serif;
+    color: white;
+    font-size: 6rem;
+    text-align: center; 
+    margin: 1rem 0rem;
+}
+
+h2 {
+    font-family: "starJediHollow";
+    font-size: 2rem;
+    color: white;
+    margin: 1rem;
+}
+
+div {
+    font-size: 1rem;
+}
+
+#character-selection {
+    display: flex;
+}
+
+.image-container {
+    position: relative;
+}
+
+img {
+    margin: 10px;
+    padding: 5px;
+    border: solid 2px lightskyblue;
+}
+
+.top-left {
+    font-family: "episode", serif;
+    background-color: rgb(128, 128, 128, 0.5);
+    border-radius: 5%;
+    line-height: 30px;
+    color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 5px;
+  }
+
+  .bottom-right {
+    font-family: "episode", serif;
+    background-color: rgb(128, 128, 128, 0.5);
+    border-radius: 5%;
+    line-height: 30px;
+    color: white;
+    position: absolute;
+    bottom: 22px;
+    right: 20px;
+    padding: 5px;
+  }
