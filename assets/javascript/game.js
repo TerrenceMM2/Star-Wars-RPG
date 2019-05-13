@@ -1,65 +1,74 @@
 $(document).ready(function () {
 
-    var character = {
+    var characters = [
 
-        skywalker : {
-            name : "Luke Skywalker",
-            HP : 120,
-            AP : 15,
-            CAP : 10,
-            id : "skywalker",
-            hero : false,
-            enemy : true
+        {
+            name: "Luke Skywalker",
+            HP: 120,
+            AP: 15,
+            CAP: 10,
+            id: "skywalker",
+            value: "0",
+            isHero: false,
+            isEnemy: false
         },
 
-        darthVader : {
-            name : "Darth Vader",
-            HP : 175,
-            AP : 25,
-            CAP : 30,
-            id : "darth-vader",
-            hero :false,
-            enemy : true
+        {
+            name: "Darth Vader",
+            HP: 175,
+            AP: 25,
+            CAP: 30,
+            id: "darth-vader",
+            value: "1",
+            isHero: false,
+            isEnemy: false
         },
 
-        bobaFett : {
-            name : "Boba Fett",
-            HP : 120,
-            AP : 15,
-            CAP : 10,
-            id : "boba-fett",
-            hero : false,
-            enemy : true
+        {
+            name: "Boba Fett",
+            HP: 120,
+            AP: 15,
+            CAP: 10,
+            id: "boba-fett",
+            value: "2",
+            isHero: false,
+            isEnemy: false
         },
 
-        tuskenRaider : {
-            name : "Tusken Raider",
-            HP : 120,
-            AP : 15,
-            CAP : 10,
-            id : "tusken-raider",
-            hero : false,
-            enemy : true
-        },
+        {
+            name: "Tusken Raider",
+            HP: 120,
+            AP: 15,
+            CAP: 10,
+            id: "tusken-raider",
+            value: "3",
+            isHero: false,
+            isEnemy: false
+        }
+    ];
+
+    var hero = [];
+    var enemies = [];
+
+    $(".image-container").on("click", function () {
+        var x = $(this).attr("value");
+        characters[x].isHero = true;
+        $(this).attr("data-role", "hero");
+        setEnemy();
+    });
+
+    function setEnemy() {
+        for (i = 0; i < characters.length; i++) {
+            if (characters[i].isHero === false) {
+                characters[i].isEnemy = true;
+                enemies.push(characters[i]);
+                console.log("enemies", enemies);
+            } else if (characters[i].isHero === true) {
+                hero.push(characters[i]);
+                console.log ("hero", hero);
+            }
+        };
     };
 
 
-    $("img").on("click", function () {
-        var hero = $(this).attr("id");
-        // Passing a string to reference a nested object.
-        // Source: https://stackoverflow.com/questions/4841254/how-to-convert-string-as-objects-field-name-in-javascript
-        hero.id = character[hero].id;
-        // if (hero.id === id) {
-        //     id = true;
-        //     return id;
-        // }
-        console.log(hero.id);
-    });
-
-
 });
-
-function newFunction(character) {
-    if (hero == character)
-        ;
-}
