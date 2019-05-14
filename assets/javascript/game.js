@@ -8,7 +8,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "skywalker",
-            value: "0",
+            "data-value": "0",
             isHero: false,
             isEnemy: false
         },
@@ -19,7 +19,7 @@ $(document).ready(function () {
             AP: 25,
             CAP: 30,
             id: "darth-vader",
-            value: "1",
+            "data-value": "1",
             isHero: false,
             isEnemy: false
         },
@@ -30,7 +30,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "boba-fett",
-            value: "2",
+            "data-value": "2",
             isHero: false,
             isEnemy: false
         },
@@ -41,7 +41,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "tusken-raider",
-            value: "3",
+            "data-value": "3",
             isHero: false,
             isEnemy: false
         }
@@ -51,21 +51,22 @@ $(document).ready(function () {
     var enemies = [];
 
     $(".image-container").on("click", function () {
-        var x = $(this).attr("value");
+        var x = $(this).attr("data-value");
         characters[x].isHero = true;
         $(this).attr("data-role", "hero");
         setEnemy();
     });
 
     function setEnemy() {
-        for (i = 0; i < characters.length; i++) {
+        for (var i = 0; i < characters.length; i++) {
             if (characters[i].isHero === false) {
                 characters[i].isEnemy = true;
                 enemies.push(characters[i]);
-                console.log("enemies", enemies);
+                $(".image-container").filter(function(index) {
+                    return index === i || $(this).attr("data-value") === i;
+                }).attr("data-role", "enemy");
             } else if (characters[i].isHero === true) {
                 hero.push(characters[i]);
-                console.log ("hero", hero);
             }
         };
     };
