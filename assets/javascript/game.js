@@ -8,8 +8,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "skywalker",
-            isHero: false,
-            isEnemy: false
+            role: "",
         },
 
         {
@@ -18,8 +17,7 @@ $(document).ready(function () {
             AP: 25,
             CAP: 30,
             id: "darth-vader",
-            isHero: false,
-            isEnemy: false
+            role: "",
         },
 
         {
@@ -28,8 +26,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "boba-fett",
-            isHero: false,
-            isEnemy: false
+            role: "",
         },
 
         {
@@ -38,8 +35,7 @@ $(document).ready(function () {
             AP: 15,
             CAP: 10,
             id: "tusken-raider",
-            isHero: false,
-            isEnemy: false
+            role: "",
         }
     ];
 
@@ -55,32 +51,46 @@ $(document).ready(function () {
     };
 
 
+
     $(".image-container").on("click", function () {
         var x = $(this).attr("id");
         $(this).attr("data-role", "hero");
-        for (i = 0; i < characters.length; i++) {
+        for (var i = 0; i < characters.length; i++) {
             if (characters[i].id === x) {
-                characters[i].isHero = true;
+                characters[i].role = "hero";
             } else {
-                characters[i].isEnemy = true;
+                characters[i].role = "enemy";
                 $(".image-container").filter(function (index) {
                     return index === i || $(this).attr("data-role") === i;
                 }).attr("data-role", "enemy");
-            }
-            console.log(characters[i]);
-
-            if (characters[i].isHero === true) {
-                var hero = $(".image-container").attr("data-role", "hero");
-                $("#hero").append(hero);
-            } else if (characters[i].isEnemy === true) {
-                var enemy = $(".image-container").attr("data-role", "enemy");
-                $("#enemies").append(enemy);
             };
-
+            console.log(characters[i]);
         };
 
+        for (var j = 0; j < characters.length; j++) {
+            switch (characters[j].role) {
+                case "hero":
+                    console.log(characters[j].name + " is the hero.");
+                    var hero = $(".image-container").attr("data-role", "hero");
+                    $("#hero").append(hero);
+                    break;
+                case "enemy":
+                    console.log(characters[j].name + " is the enemy.");
+                    var enemy = $(".image-container").attr("data-role", "enemy");
+                    $("#enemies").append(enemy);
+                    break;
+                case "opponent":
+                    console.log(characters[j].name + " is the opponent.");
+                    break;
+            };
+        };
 
     });
+
+
+
+
+});
 
 
 
@@ -112,6 +122,3 @@ $(document).ready(function () {
     //     characters[x].isHero = true;
     //     $(this).attr("data-role", "hero");
     // }
-
-
-});
