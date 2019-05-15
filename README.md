@@ -2,7 +2,7 @@
 Vanderbilt Coding Boot Camp Coursework #4: Star Wars RPG
 
 ## Pseudocode  
-1. User selects "hero" character by clicking image `on.("click")`
+1. User selects "hero" character by clicking image `on.("click")`  
     1. Unselected characters move to "enemies" section  
 2. User select first opponent `on.("click")`  
     2. Selected opponent moves to "current opponent" section.  
