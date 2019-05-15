@@ -56,7 +56,7 @@ $(document).ready(function () {
         $(this).attr("data-role", "hero");
         setEnemy();
     });
-
+    
     function setEnemy() {
         for (var i = 0; i < characters.length; i++) {
             if (characters[i].isHero === false) {
