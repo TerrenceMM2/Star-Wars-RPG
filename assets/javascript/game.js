@@ -65,18 +65,21 @@ $(document).ready(function () {
         characterHP.text("HP: " + characters[i].HP);
         $(container).append(characterHP);
     };
-
+    
+//.one("click") - not working. Why?
+// parent - child selector not adhereing
     $("#character-selection > .image-container").one("click", function () {
         var heroValue = $(this).attr("data-value");
         characters[heroValue].role = "hero";
+
         for (var j = 0; j < characters.length; j++) {
             if (characters[j].role === "hero") {
-                $(this).attr("data-role", "hero");
+                $(this).attr("data-role", "hero").attr("id", "hero");
             } else {
                 characters[j].role = "enemy";
                 $(".image-container").filter(function (index) {
                     return index === j || $(this).attr("data-value") === j;
-                }).attr("data-role", "enemy");
+                }).attr("data-role", "enemy").attr("id", "enemy");
             };
         };
 
@@ -86,23 +89,25 @@ $(document).ready(function () {
                     // Grab element by data-role assignment.
                     // Source: https://stackoverflow.com/questions/9499998/jquery-select-all-elements-that-have-jquery-data
                     var hero = $('[data-role="hero"]');
-                    $("#hero").append(hero);
+                    $("#selected-hero").append(hero);
                     break;
                 case "enemy":
                     var enemy = $('[data-role="enemy"]');
                     $("#enemies").append(enemy);
                     break;
-                case "opponent":
-                    break;
             };
         };
 
+        $("#directions").remove();
+        $("#character-selection").remove();
+
     });
 
+    $("#enemies > .image-container").on("click", function () {
 
+    });
 
 });
-
 
 
 
