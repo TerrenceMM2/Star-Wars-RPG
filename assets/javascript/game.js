@@ -9,6 +9,7 @@ $(document).ready(function () {
             CAP: 10,
             id: "skywalker",
             role: "",
+            imgSrc: "assets/images/skywalker.jpg"
         },
 
         {
@@ -18,6 +19,7 @@ $(document).ready(function () {
             CAP: 30,
             id: "darth-vader",
             role: "",
+            imgSrc: "assets/images/darth_vader.jpg"
         },
 
         {
@@ -27,6 +29,7 @@ $(document).ready(function () {
             CAP: 10,
             id: "boba-fett",
             role: "",
+            imgSrc: "assets/images/boba_fett.jpg"
         },
 
         {
@@ -36,51 +39,60 @@ $(document).ready(function () {
             CAP: 10,
             id: "tusken-raider",
             role: "",
+            imgSrc: "assets/images/tusken_raider.jpg"
         }
     ];
 
-
     for (var i = 0; i < characters.length; i++) {
+        var container = $("<div>");
+        container.addClass("image-container");
+        container.attr("data-value", i);
+        container.attr("data-role", "");
+        $("#character-selection").append(container);
 
-        var characterName = $(".name");
-        var characterHP = $(".hp");
+        var character = $("<img>");
+        character.attr("id", characters[i].id);
+        character.attr("src", characters[i].imgSrc);
+        $(container).append(character);
 
+        var characterName = $("<div>");
+        characterName.addClass("name top-left");
         characterName.text(characters[i].name);
-        characterHP.text("HP:" + characters[i].HP);
+        $(container).append(characterName);
 
+        var characterHP = $("<div>");
+        characterHP.addClass("hp bottom-right");
+        characterHP.text("HP: " + characters[i].HP);
+        $(container).append(characterHP);
     };
 
-
-
-    $(".image-container").on("click", function () {
-        var x = $(this).attr("id");
-        $(this).attr("data-role", "hero");
-        for (var i = 0; i < characters.length; i++) {
-            if (characters[i].id === x) {
-                characters[i].role = "hero";
+    $("#character-selection > .image-container").one("click", function () {
+        var heroValue = $(this).attr("data-value");
+        characters[heroValue].role = "hero";
+        for (var j = 0; j < characters.length; j++) {
+            if (characters[j].role === "hero") {
+                $(this).attr("data-role", "hero");
             } else {
-                characters[i].role = "enemy";
+                characters[j].role = "enemy";
                 $(".image-container").filter(function (index) {
-                    return index === i || $(this).attr("data-role") === i;
+                    return index === j || $(this).attr("data-value") === j;
                 }).attr("data-role", "enemy");
             };
-            console.log(characters[i]);
         };
 
-        for (var j = 0; j < characters.length; j++) {
-            switch (characters[j].role) {
+        for (var k = 0; k < characters.length; k++) {
+            switch (characters[k].role) {
                 case "hero":
-                    console.log(characters[j].name + " is the hero.");
-                    var hero = $(".image-container").attr("data-role", "hero");
+                    // Grab element by data-role assignment.
+                    // Source: https://stackoverflow.com/questions/9499998/jquery-select-all-elements-that-have-jquery-data
+                    var hero = $('[data-role="hero"]');
                     $("#hero").append(hero);
                     break;
                 case "enemy":
-                    console.log(characters[j].name + " is the enemy.");
-                    var enemy = $(".image-container").attr("data-role", "enemy");
+                    var enemy = $('[data-role="enemy"]');
                     $("#enemies").append(enemy);
                     break;
                 case "opponent":
-                    console.log(characters[j].name + " is the opponent.");
                     break;
             };
         };
@@ -89,36 +101,36 @@ $(document).ready(function () {
 
 
 
-
 });
 
 
 
-    // var hero = [];
-    // var enemies = [];
 
-    // $(".image-container").on("click", function () {
-    //     var x = $(this).attr("data-value");
-    //     setHero(x);
-    //     setEnemy();
-    // });
+// var hero = [];
+// var enemies = [];
 
-    // function setEnemy() {
-    //     for (var i = 0; i < characters.length; i++) {
-    //         if (characters[i].isHero === false) {
-    //             characters[i].isEnemy = true;
-    //             enemies.push(characters[i]);
-    //             $(".image-container").filter(function(index) {
-    //                 return index === i || $(this).attr("data-value") === i;
-    //             }).attr("data-role", "enemy");
-    //         } else if (characters[i].isHero === true) {
-    //             hero.push(characters[i]);
-    //         }
-    //     };
-    // };
+// $(".image-container").on("click", function () {
+//     var x = $(this).attr("data-value");
+//     setHero(x);
+//     setEnemy();
+// });
 
-    // function setHero(x) {
-    //     // var x = $(this).attr("data-value");
-    //     characters[x].isHero = true;
-    //     $(this).attr("data-role", "hero");
-    // }
+// function setEnemy() {
+//     for (var i = 0; i < characters.length; i++) {
+//         if (characters[i].isHero === false) {
+//             characters[i].isEnemy = true;
+//             enemies.push(characters[i]);
+//             $(".image-container").filter(function(index) {
+//                 return index === i || $(this).attr("data-value") === i;
+//             }).attr("data-role", "enemy");
+//         } else if (characters[i].isHero === true) {
+//             hero.push(characters[i]);
+//         }
+//     };
+// };
+
+// function setHero(x) {
+//     // var x = $(this).attr("data-value");
+//     characters[x].isHero = true;
+//     $(this).attr("data-role", "hero");
+// }
