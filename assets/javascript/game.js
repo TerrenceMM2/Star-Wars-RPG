@@ -1,3 +1,5 @@
+var enemiesArray = [];
+
 $(document).ready(function () {
 
     var characters = [
@@ -73,7 +75,6 @@ $(document).ready(function () {
     $("#character-selection").on("click", ".image-container", function () {
         var heroValue = $(this).attr("data-value");
         characters[heroValue].role = "hero";
-
         for (var j = 0; j < characters.length; j++) {
             if (characters[j].role === "hero") {
                 $(this).attr("data-role", "hero").attr("id", "hero");
@@ -84,11 +85,13 @@ $(document).ready(function () {
                 audioSource.attr("type", "audio/mpeg");
                 $("#selected-hero").append(audio);
                 $("#hero-sound").append(audioSource);
+                musicBed();
             } else {
                 characters[j].role = "enemy";
                 $(".image-container").filter(function (index) {
                     return index === j || $(this).attr("data-value") === j;
                 }).attr("data-role", "enemy").attr("id", "enemy");
+                enemiesArray.push(character[j]);
             };
         };
 
@@ -117,22 +120,36 @@ $(document).ready(function () {
         button.text("Attack!");
         $("#selected-hero").append(button);
 
+        var message = $("<div>");
+        message.addClass("message");
+        message.text("");
+        $(".attack").before(message);
+
     });
 
     $("#enemies").on("click", ".image-container", function () {
-        var opponentValue = $(this).attr("data-value");
-        characters[opponentValue].role = "opponent";
-        $(this).attr("data-role", "opponent").attr("id", "opponent");
-        $("#current-opponent").append(this);
+        if ($("#opponent").length) {
+            $(".message").text("You are current in combat.");
+            $(".message").attr("id", "info");
+        } else {
+            var opponentValue = $(this).attr("data-value");
+            characters[opponentValue].role = "opponent";
+            $(this).attr("data-role", "opponent").attr("id", "opponent");
+            $("#current-opponent").append(this);
+            $(".message").attr("id", "reset");
+        }
     });
 
-    $("#selected-hero").on("click", ".attack", function() {
+    $("#selected-hero").on("click", ".attack", function () {
         if ($("#opponent").attr("data-value") == null) {
-            console.log("please select an opponent");
+            $(".message").text("Please select an opponent.");
+            $(".message").attr("id", "warning");
+            infoSound();
         } else {
-        var heroValue = $("#hero").attr("data-value");
-        var opponentValue = $("#opponent").attr("data-value");
-        attack(heroValue, opponentValue);
+            $(".message").attr("id", "reset");
+            var heroValue = $("#hero").attr("data-value");
+            var opponentValue = $("#opponent").attr("data-value");
+            attack(heroValue, opponentValue);
         }
     });
 
@@ -143,10 +160,29 @@ $(document).ready(function () {
         $("#selected-hero > .image-container > .hp").text("HP: " + characters[heroValue].HP);
         $("#current-opponent > .image-container > .hp").text("HP: " + characters[opponentValue].HP);
         if (characters[heroValue].HP <= 0) {
-            console.log("you lose");
+            $("#selected-hero > .image-container").css("filter", "grayscale(1)");
+            $(".message").text("You have been defeated.");
+            $(".message").attr("id", "loss");
         } else if (characters[opponentValue].HP <= 0) {
+            $(".message").text("Choose your next opponent.");
+            $(".message").attr("id", "info");
             $("#current-opponent > #opponent").remove();
-        }
-    }
+            infoSound();
+        };
+
+    };
+
+    function musicBed() {
+        audio = document.getElementById("music-bed");
+        audio.loop = true;
+        audio.play();
+        audio.currentTime = 0;
+    };
+
+    function infoSound() {
+        audio = document.getElementById("info-sound");
+        audio.play();
+        audio.currentTime = 0;
+    };
 
 });

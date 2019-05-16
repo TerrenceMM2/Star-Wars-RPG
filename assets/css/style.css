@@ -46,26 +46,44 @@ div {
   color: black;
   margin: 1rem;
   background-color: white;
-  display: inline-block;
+  display: none;
   padding: 1rem;
   line-height: 1.75rem;
   font-weight: bold;
   border-radius: 5px;
+  height: 30px;
+  float: left;
+  position: absolute;
+  margin-left: 285px;
+  margin-top: 10px;
+}
+
+#reset {
+  display: none;
 }
 
 #win {
   display: inline-block;
-  background-color: #95df57;
+  background-color: #28a745;
+  color: white;
 }
 
 #loss {
   display: inline-block;
   background-color: #dc3545;
+  color: white;
 }
 
 #warning {
   display: inline-block;
   background-color: #ffc107;
+  color: black;
+}
+
+#info {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
 }
 
 .characters {
