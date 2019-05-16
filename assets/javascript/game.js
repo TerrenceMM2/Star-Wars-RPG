@@ -78,20 +78,21 @@ $(document).ready(function () {
         for (var j = 0; j < characters.length; j++) {
             if (characters[j].role === "hero") {
                 $(this).attr("data-role", "hero").attr("id", "hero");
-                var audio = $("<audio>");
-                audio.attr("id", "hero-sound");
-                var audioSource = $("<source>")
-                audioSource.attr("src", characters[j].audioSrc);
-                audioSource.attr("type", "audio/mpeg");
-                $("#selected-hero").append(audio);
-                $("#hero-sound").append(audioSource);
+                // var audio = $("<audio>");
+                // audio.attr("id", "hero-sound");
+                // var audioSource = $("<source>")
+                // audioSource.attr("src", characters[j].audioSrc);
+                // audioSource.attr("type", "audio/mpeg");
+                // $("#selected-hero").append(audio);
+                // $("#hero-sound").append(audioSource);
+                heroSound(j);
                 musicBed();
             } else {
                 characters[j].role = "enemy";
                 $(".image-container").filter(function (index) {
                     return index === j || $(this).attr("data-value") === j;
                 }).attr("data-role", "enemy").attr("id", "enemy");
-                enemiesArray.push(character[j]);
+                enemiesArray.push(characters[j]);
             };
         };
 
@@ -138,6 +139,8 @@ $(document).ready(function () {
             $(this).attr("data-role", "opponent").attr("id", "opponent");
             $("#current-opponent").append(this);
             $(".message").attr("id", "reset");
+            enemySound(opponentValue);
+            $("audio#enemy-sound")[0].play();
         }
     });
 
@@ -151,7 +154,8 @@ $(document).ready(function () {
             var heroValue = $("#hero").attr("data-value");
             var opponentValue = $("#opponent").attr("data-value");
             attack(heroValue, opponentValue);
-        }
+        };
+        checkStatus();
     });
 
     function attack(heroValue, opponentValue) {
@@ -164,13 +168,16 @@ $(document).ready(function () {
             $("#selected-hero > .image-container").css("filter", "grayscale(1)");
             $(".message").text("YOU HAVE BEEN DEFEATED");
             $(".message").attr("id", "loss");
+            stopMusicBed();
+            lossMusic();
         } else if (characters[opponentValue].HP <= 0) {
             $(".message").text("CHOOSE YOUR NEXT OPPONENT");
             $(".message").attr("id", "info");
             $("#current-opponent > #opponent").remove();
+            enemiesArray.pop();
+            $("#enemy-sound").remove();
             infoSound();
         };
-
     };
 
     function musicBed() {
@@ -180,10 +187,60 @@ $(document).ready(function () {
         audio.currentTime = 0;
     };
 
+    function stopMusicBed() {
+        audio = document.getElementById("music-bed");
+        audio.pause();
+    }
+
+    function winMusic() {
+        audio = document.getElementById("win-music");
+        audio.loop = true;
+        audio.currentTime = 0;
+        audio.volume = 0.5;
+        audio.play();
+    };
+
+    function lossMusic() {
+        audio = document.getElementById("loss-music");
+        audio.loop = true;
+        audio.currentTime = 0;
+        audio.volume = 0.5;
+        audio.play();
+    };
+
+    function heroSound(j) {
+        var audio = $("<audio>");
+        audio.attr("id", "hero-sound");
+        var audioSource = $("<source>")
+        audioSource.attr("src", characters[j].audioSrc);
+        audioSource.attr("type", "audio/mpeg");
+        $("#selected-hero").append(audio);
+        $("#hero-sound").append(audioSource);
+    };
+
+    function enemySound(m) {
+        var audio = $("<audio>");
+        audio.attr("id", "enemy-sound");
+        var audioSource = $("<source>")
+        audioSource.attr("src", characters[m].audioSrc);
+        audioSource.attr("type", "audio/mpeg");
+        $("#current-opponent").append(audio);
+        $("#enemy-sound").append(audioSource);
+    };
+
     function infoSound() {
         audio = document.getElementById("info-sound");
         audio.play();
         audio.currentTime = 0;
+    };
+
+    function checkStatus() {
+        if (enemiesArray.length === 0) {
+            $(".message").text("YOU WIN");
+            $(".message").attr("id", "win");
+            stopMusicBed();
+            winMusic();
+        };
     };
 
 });
