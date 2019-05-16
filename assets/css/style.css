@@ -89,3 +89,16 @@ img {
   #opponent > img {
     border: solid 2px #dc3545;
   }
+
+  .attack {
+    background-color: black;
+    border: none;
+    color: #dc3545;
+    height: 50px;
+    font-family: "starJedi", serif;
+    position: relative;
+    padding: 10px;
+    border-radius: 5%;
+    font-size: 20px;
+    margin-top: 225px;
+  }

@@ -65,10 +65,8 @@ $(document).ready(function () {
         characterHP.text("HP: " + characters[i].HP);
         $(container).append(characterHP);
     };
-    
-//.one("click") - not working. Why?
-// parent - child selector not adhereing
-    $("#character-selection > .image-container").one("click", function () {
+
+    $("#character-selection").on("click", ".image-container", function () {
         var heroValue = $(this).attr("data-value");
         characters[heroValue].role = "hero";
 
@@ -101,41 +99,38 @@ $(document).ready(function () {
         $("#directions").remove();
         $("#character-selection").remove();
 
+        var button = $("<button>");
+        button.attr("type", "button");
+        button.addClass("attack");
+        button.text("Attack!");
+        $("#selected-hero").append(button);
+
     });
 
-    $("#enemies > .image-container").on("click", function () {
-
+    $("#enemies").on("click", ".image-container", function () {
+        var opponentValue = $(this).attr("data-value");
+        characters[opponentValue].role = "opponent";
+        $(this).attr("data-role", "opponent").attr("id", "opponent");
+        $("#current-opponent").append(this);
     });
+
+    $("#selected-hero").on("click", ".attack", function() {
+        var heroValue = $("#hero").attr("data-value");
+        var enemyValue = $("#enemy").attr("data-value");
+        attack(heroValue, enemyValue);
+    });
+
+    function attack(heroValue, enemyValue) {
+        characters[heroValue].HP = characters[heroValue].HP - characters[enemyValue].CAP;
+        characters[enemyValue].HP = characters[enemyValue].HP - characters[heroValue].AP;
+        characters[heroValue].AP += characters[heroValue].AP;
+        $("#selected-hero > .image-container > .hp").text("HP: " + characters[heroValue].HP);
+        $("#current-opponent > .image-container > .hp").text("HP: " + characters[enemyValue].HP);
+        if (characters[heroValue].HP <= 0) {
+            console.log("you lose");
+        } else if (characters[enemyValue].HP <= 0) {
+            $("#enemy").remove();
+        }
+    }
 
 });
-
-
-
-// var hero = [];
-// var enemies = [];
-
-// $(".image-container").on("click", function () {
-//     var x = $(this).attr("data-value");
-//     setHero(x);
-//     setEnemy();
-// });
-
-// function setEnemy() {
-//     for (var i = 0; i < characters.length; i++) {
-//         if (characters[i].isHero === false) {
-//             characters[i].isEnemy = true;
-//             enemies.push(characters[i]);
-//             $(".image-container").filter(function(index) {
-//                 return index === i || $(this).attr("data-value") === i;
-//             }).attr("data-role", "enemy");
-//         } else if (characters[i].isHero === true) {
-//             hero.push(characters[i]);
-//         }
-//     };
-// };
-
-// function setHero(x) {
-//     // var x = $(this).attr("data-value");
-//     characters[x].isHero = true;
-//     $(this).attr("data-role", "hero");
-// }
