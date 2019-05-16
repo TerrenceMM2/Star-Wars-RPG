@@ -1,5 +1,6 @@
 # coursework4-star-wars-rpg
-Vanderbilt Coding Boot Camp Coursework #4: Star Wars RPG
+Vanderbilt Coding Boot Camp Coursework #4: Star Wars RPG  
+Live Link: https://terrencemm2.github.io/coursework4-star-wars-rpg/  
 
 ## Pseudocode  
 1. User selects "hero" character by clicking image `on.("click")`  
