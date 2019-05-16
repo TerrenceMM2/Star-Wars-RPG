@@ -56,6 +56,8 @@ div {
   position: absolute;
   margin-left: 285px;
   margin-top: 10px;
+  word-spacing: 5px;
+  letter-spacing: 2px;
 }
 
 #reset {
@@ -110,6 +112,7 @@ img {
     top: 20px;
     left: 20px;
     padding: 5px;
+    letter-spacing: 2px;
   }
 
   .bottom-right {
@@ -122,6 +125,7 @@ img {
     bottom: 22px;
     right: 20px;
     padding: 5px;
+    letter-spacing: 2px;
   }
 
   #hero > img {

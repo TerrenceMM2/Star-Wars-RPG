@@ -129,8 +129,9 @@ $(document).ready(function () {
 
     $("#enemies").on("click", ".image-container", function () {
         if ($("#opponent").length) {
-            $(".message").text("You are current in combat.");
+            $(".message").text("YOU ARE CURRENTLY IN COMBAT");
             $(".message").attr("id", "info");
+            infoSound();
         } else {
             var opponentValue = $(this).attr("data-value");
             characters[opponentValue].role = "opponent";
@@ -142,7 +143,7 @@ $(document).ready(function () {
 
     $("#selected-hero").on("click", ".attack", function () {
         if ($("#opponent").attr("data-value") == null) {
-            $(".message").text("Please select an opponent.");
+            $(".message").text("PLEASE SELECT AN OPPONENT");
             $(".message").attr("id", "warning");
             infoSound();
         } else {
@@ -161,10 +162,10 @@ $(document).ready(function () {
         $("#current-opponent > .image-container > .hp").text("HP: " + characters[opponentValue].HP);
         if (characters[heroValue].HP <= 0) {
             $("#selected-hero > .image-container").css("filter", "grayscale(1)");
-            $(".message").text("You have been defeated.");
+            $(".message").text("YOU HAVE BEEN DEFEATED");
             $(".message").attr("id", "loss");
         } else if (characters[opponentValue].HP <= 0) {
-            $(".message").text("Choose your next opponent.");
+            $(".message").text("CHOOSE YOUR NEXT OPPONENT");
             $(".message").attr("id", "info");
             $("#current-opponent > #opponent").remove();
             infoSound();
