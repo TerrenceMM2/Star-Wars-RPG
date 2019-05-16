@@ -9,7 +9,7 @@ $(document).ready(function () {
             CAP: 10,
             id: "skywalker",
             role: "",
-            imgSrc: "assets/images/skywalker.jpg"
+            imgSrc: "assets/images/skywalker.jpg",
         },
 
         {
@@ -115,21 +115,25 @@ $(document).ready(function () {
     });
 
     $("#selected-hero").on("click", ".attack", function() {
+        if ($("#opponent").attr("data-value") == null) {
+            console.log("please select an opponent");
+        } else {
         var heroValue = $("#hero").attr("data-value");
-        var enemyValue = $("#enemy").attr("data-value");
-        attack(heroValue, enemyValue);
+        var opponentValue = $("#opponent").attr("data-value");
+        attack(heroValue, opponentValue);
+        }
     });
 
-    function attack(heroValue, enemyValue) {
-        characters[heroValue].HP = characters[heroValue].HP - characters[enemyValue].CAP;
-        characters[enemyValue].HP = characters[enemyValue].HP - characters[heroValue].AP;
+    function attack(heroValue, opponentValue) {
+        characters[heroValue].HP = characters[heroValue].HP - characters[opponentValue].CAP;
+        characters[opponentValue].HP = characters[opponentValue].HP - characters[heroValue].AP;
         characters[heroValue].AP += characters[heroValue].AP;
         $("#selected-hero > .image-container > .hp").text("HP: " + characters[heroValue].HP);
-        $("#current-opponent > .image-container > .hp").text("HP: " + characters[enemyValue].HP);
+        $("#current-opponent > .image-container > .hp").text("HP: " + characters[opponentValue].HP);
         if (characters[heroValue].HP <= 0) {
             console.log("you lose");
-        } else if (characters[enemyValue].HP <= 0) {
-            $("#enemy").remove();
+        } else if (characters[opponentValue].HP <= 0) {
+            $("#current-opponent > #opponent").remove();
         }
     }
 
