@@ -10,6 +10,7 @@ $(document).ready(function () {
             id: "skywalker",
             role: "",
             imgSrc: "assets/images/skywalker.jpg",
+            audioSrc: "assets/sounds/lightsaber.mp3"
         },
 
         {
@@ -19,7 +20,8 @@ $(document).ready(function () {
             CAP: 30,
             id: "darth-vader",
             role: "",
-            imgSrc: "assets/images/darth_vader.jpg"
+            imgSrc: "assets/images/darth_vader.jpg",
+            audioSrc: "assets/sounds/vader_breathing.mp3"
         },
 
         {
@@ -29,7 +31,8 @@ $(document).ready(function () {
             CAP: 10,
             id: "boba-fett",
             role: "",
-            imgSrc: "assets/images/boba_fett.jpg"
+            imgSrc: "assets/images/boba_fett.jpg",
+            audioSrc: "assets/sounds/boba_fett.mp3"
         },
 
         {
@@ -39,7 +42,8 @@ $(document).ready(function () {
             CAP: 10,
             id: "tusken-raider",
             role: "",
-            imgSrc: "assets/images/tusken_raider.jpg"
+            imgSrc: "assets/images/tusken_raider.jpg",
+            audioSrc: "assets/sounds/tusken_raider.mp3"
         }
     ];
 
@@ -73,6 +77,13 @@ $(document).ready(function () {
         for (var j = 0; j < characters.length; j++) {
             if (characters[j].role === "hero") {
                 $(this).attr("data-role", "hero").attr("id", "hero");
+                var audio = $("<audio>");
+                audio.attr("id", "hero-sound");
+                var audioSource = $("<source>")
+                audioSource.attr("src", characters[j].audioSrc);
+                audioSource.attr("type", "audio/mpeg");
+                $("#selected-hero").append(audio);
+                $("#hero-sound").append(audioSource);
             } else {
                 characters[j].role = "enemy";
                 $(".image-container").filter(function (index) {
@@ -98,6 +109,7 @@ $(document).ready(function () {
 
         $("#directions").remove();
         $("#character-selection").remove();
+        $("audio#hero-sound")[0].play();
 
         var button = $("<button>");
         button.attr("type", "button");

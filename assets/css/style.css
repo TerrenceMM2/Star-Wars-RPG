@@ -40,6 +40,34 @@ div {
     font-size: 1rem;
 }
 
+.message {
+  font-family: "episode", serif;
+  font-size: 1.25rem;
+  color: black;
+  margin: 1rem;
+  background-color: white;
+  display: inline-block;
+  padding: 1rem;
+  line-height: 1.75rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+#win {
+  display: inline-block;
+  background-color: #95df57;
+}
+
+#loss {
+  display: inline-block;
+  background-color: #dc3545;
+}
+
+#warning {
+  display: inline-block;
+  background-color: #ffc107;
+}
+
 .characters {
     display: flex;
 }
