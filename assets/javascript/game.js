@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    function startGame() {
-
     var enemiesArray = [];
 
     var characters = [
@@ -51,29 +49,34 @@ $(document).ready(function () {
         }
     ];
 
+
     // To generate images from object key:values in characters array.
-    for (var i = 0; i < characters.length; i++) {
-        var container = $("<div>");
-        container.addClass("image-container");
-        container.attr("data-value", i);
-        container.attr("data-role", "");
-        $("#character-selection").append(container);
+    function generateCharacters() {
+        for (var i = 0; i < characters.length; i++) {
+            var container = $("<div>");
+            container.addClass("image-container");
+            container.attr("data-value", i);
+            container.attr("data-role", "");
+            $("#character-selection").append(container);
 
-        var character = $("<img>");
-        character.attr("id", characters[i].id);
-        character.attr("src", characters[i].imgSrc);
-        $(container).append(character);
+            var character = $("<img>");
+            character.attr("id", characters[i].id);
+            character.attr("src", characters[i].imgSrc);
+            $(container).append(character);
 
-        var characterName = $("<div>");
-        characterName.addClass("name top-left");
-        characterName.text(characters[i].name);
-        $(container).append(characterName);
+            var characterName = $("<div>");
+            characterName.addClass("name top-left");
+            characterName.text(characters[i].name);
+            $(container).append(characterName);
 
-        var characterHP = $("<div>");
-        characterHP.addClass("hp bottom-right");
-        characterHP.text("HP: " + characters[i].HP);
-        $(container).append(characterHP);
+            var characterHP = $("<div>");
+            characterHP.addClass("hp bottom-right");
+            characterHP.text("HP: " + characters[i].HP);
+            $(container).append(characterHP);
+        };
     };
+
+    generateCharacters();
 
     // Used to move selected character to "Hero" sections and set hero attributes
     // Conversely, will move non-selected attributes to "Enemies" sections and set enemy attributes.
@@ -110,7 +113,7 @@ $(document).ready(function () {
             };
         };
 
-        $(".directions").remove();
+        $(".directions").css("display", "none");
         $("audio#hero-sound")[0].play();
 
         // Dynamically creates "Attack" button after initial character selection.
@@ -135,7 +138,7 @@ $(document).ready(function () {
             $(".message").text("YOU ARE CURRENTLY IN COMBAT");
             $(".message").attr("id", "info");
             infoSound();
-        // Selected enemy is set as an opponent.
+            // Selected enemy is set as an opponent.
         } else {
             var opponentValue = $(this).attr("data-value");
             characters[opponentValue].role = "opponent";
@@ -146,7 +149,7 @@ $(document).ready(function () {
             $("audio#enemy-sound")[0].play();
         }
     });
-    
+
     // Attack button
     $("#selected-hero").on("click", ".attack", function () {
         // First determine if there is an opponent. If not, user is instructed to select an opponent.
@@ -154,7 +157,7 @@ $(document).ready(function () {
             $(".message").text("PLEASE SELECT AN OPPONENT");
             $(".message").attr("id", "warning");
             infoSound();
-        // Any previous notifications are reset. Hero/Enemy values are set.
+            // Any previous notifications are reset. Hero/Enemy values are set.
         } else {
             $(".message").attr("id", "reset");
             var heroValue = $("#hero").attr("data-value");
@@ -182,8 +185,7 @@ $(document).ready(function () {
             stopMusicBed();
             lossMusic();
             reset();
-            $(".reset").on("click", startGame());
-        // If opponent's HP is less than/equal to 0, opponent is defeated. User instructed to choose another opponent, if any.
+            // If opponent's HP is less than/equal to 0, opponent is defeated. User instructed to choose another opponent, if any.
         } else if (characters[opponentValue].HP <= 0) {
             $(".message").text("CHOOSE YOUR NEXT OPPONENT");
             $(".message").attr("id", "info");
@@ -217,6 +219,11 @@ $(document).ready(function () {
         audio.play();
     };
 
+    function stopWinMusic() {
+        audio = document.getElementById("win-music");
+        audio.pause();
+    }
+
     // Losing music plays if user loses.
     function lossMusic() {
         audio = document.getElementById("loss-music");
@@ -225,6 +232,11 @@ $(document).ready(function () {
         audio.volume = 0.5;
         audio.play();
     };
+
+    function stopLossMusic() {
+        audio = document.getElementById("loss-music");
+        audio.pause();
+    }
 
     // Plays sound on hero selected.
     function heroSound(j) {
@@ -264,7 +276,6 @@ $(document).ready(function () {
             stopMusicBed();
             winMusic();
             reset();
-            $(".reset").on("click", startGame());
         };
     };
 
@@ -275,10 +286,77 @@ $(document).ready(function () {
         reset.addClass("reset");
         reset.text("play again?");
         $("#selected-hero").append(reset);
+        $(".reset").on("click", resetGame);
     };
 
-};
+    function resetGame() {
+        stopWinMusic();
+        stopLossMusic();
+        enemiesArray = [];
+        characters = [];
+        $(".directions").css("display", "block");
+        $(".attack").css("display", "none");
+        $(".reset").css("display", "none");
+        $(".message").attr("id", "reset");
+        $("#hero-sound").remove();
+        $("#enemy-sound").remove();
+        $(".image-container").remove();
+        var characterReset = $(".image-container");
+        characterReset.attr("data-role", "");
+        characterReset.attr("id", "");
+        characterReset.attr("style", "");
+        $("#character-selection").append(characterReset);
+        characters = [
 
-startGame();
+            {
+                name: "Luke Skywalker",
+                HP: 120,
+                AP: 15,
+                CAP: 10,
+                id: "skywalker",
+                role: "",
+                imgSrc: "assets/images/skywalker.jpg",
+                audioSrc: "assets/sounds/lightsaber.mp3"
+            },
+
+            {
+                name: "Darth Vader",
+                HP: 175,
+                AP: 25,
+                CAP: 30,
+                id: "darth-vader",
+                role: "",
+                imgSrc: "assets/images/darth_vader.jpg",
+                audioSrc: "assets/sounds/vader_breathing.mp3"
+            },
+
+            {
+                name: "Boba Fett",
+                HP: 120,
+                AP: 15,
+                CAP: 10,
+                id: "boba-fett",
+                role: "",
+                imgSrc: "assets/images/boba_fett.jpg",
+                audioSrc: "assets/sounds/boba_fett.mp3"
+            },
+
+            {
+                name: "Tusken Raider",
+                HP: 120,
+                AP: 15,
+                CAP: 10,
+                id: "tusken-raider",
+                role: "",
+                imgSrc: "assets/images/tusken_raider.jpg",
+                audioSrc: "assets/sounds/tusken_raider.mp3"
+            }
+        ];
+        for (var n = 0; n < characters.length; n++) {
+            var characterHP = $(".hp");
+            characterHP.text("HP: " + characters[n].HP);
+        };
+        generateCharacters();
+    };
 
 });
