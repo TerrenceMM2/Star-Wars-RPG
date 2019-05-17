@@ -178,6 +178,7 @@ $(document).ready(function () {
             $("#selected-hero > .image-container").css("filter", "grayscale(1)");
             $(".message").text("YOU HAVE BEEN DEFEATED");
             $(".message").attr("id", "loss");
+            $(".attack").click(false);
             stopMusicBed();
             lossMusic();
             reset();
@@ -259,6 +260,7 @@ $(document).ready(function () {
         if (enemiesArray.length === 0) {
             $(".message").text("YOU WIN");
             $(".message").attr("id", "win");
+            $(".attack").click(false);
             stopMusicBed();
             winMusic();
             reset();
