@@ -14,17 +14,26 @@
 <body>
     <h1>STAR WARS RPG</h1>
 
-    <h2 id="directions">choose your character:</h2>
-    <div class="characters" id="character-selection"></div>
+    <div class="directions">
+        <h2 id="directions">choose your character:</h2>
+        <div class="characters" id="character-selection"></div>
+    </div>
 
-    <h2>hero:</h2>
-    <div class="characters" id="selected-hero"></div>
+    <div class="clearfix">
+        <div id="hero-container">
+            <h2>hero:</h2>
+            <div class="characters" id="selected-hero"></div>
+        </div>
 
+        <div id="opponent-container">
+            <h2>opponent:</h2>
+            <div class="characters" id="current-opponent"></div>
+        </div>
+    </div>
+
+    <div class="message">Sample text</div>
     <h2>enemies remaining:</h2>
     <div class="characters" id="enemies"></div>
-
-    <h2>opponent:</h2>
-    <div class="characters" id="current-opponent"></div>
 
     <audio id="music-bed">
         <source src="assets/sounds/music_bed.mp3" type="audio/mpeg">

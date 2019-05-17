@@ -1,6 +1,8 @@
-var enemiesArray = [];
-
 $(document).ready(function () {
+
+    function startGame() {
+
+    var enemiesArray = [];
 
     var characters = [
 
@@ -49,6 +51,7 @@ $(document).ready(function () {
         }
     ];
 
+    // To generate images from object key:values in characters array.
     for (var i = 0; i < characters.length; i++) {
         var container = $("<div>");
         container.addClass("image-container");
@@ -72,19 +75,15 @@ $(document).ready(function () {
         $(container).append(characterHP);
     };
 
+    // Used to move selected character to "Hero" sections and set hero attributes
+    // Conversely, will move non-selected attributes to "Enemies" sections and set enemy attributes.
+    // This function will only be used once as the "#character-selection" container will be removed from the DOM after selection.
     $("#character-selection").on("click", ".image-container", function () {
         var heroValue = $(this).attr("data-value");
         characters[heroValue].role = "hero";
         for (var j = 0; j < characters.length; j++) {
             if (characters[j].role === "hero") {
                 $(this).attr("data-role", "hero").attr("id", "hero");
-                // var audio = $("<audio>");
-                // audio.attr("id", "hero-sound");
-                // var audioSource = $("<source>")
-                // audioSource.attr("src", characters[j].audioSrc);
-                // audioSource.attr("type", "audio/mpeg");
-                // $("#selected-hero").append(audio);
-                // $("#hero-sound").append(audioSource);
                 heroSound(j);
                 musicBed();
             } else {
@@ -111,28 +110,32 @@ $(document).ready(function () {
             };
         };
 
-        $("#directions").remove();
-        $("#character-selection").remove();
+        $(".directions").remove();
         $("audio#hero-sound")[0].play();
 
+        // Dynamically creates "Attack" button after initial character selection.
         var button = $("<button>");
         button.attr("type", "button");
         button.addClass("attack");
-        button.text("Attack!");
+        button.text("attack!");
         $("#selected-hero").append(button);
 
-        var message = $("<div>");
-        message.addClass("message");
-        message.text("");
-        $(".attack").before(message);
+        // Dynamically creates message div. Is hidden by default.
+        // var message = $("<div>");
+        // message.addClass("message");
+        // message.text("");
+        // $(".attack").before(message);
 
     });
 
+    // When an image is clicked in the enemies section, first will evaluate if there is currently assigned as an opponent.
     $("#enemies").on("click", ".image-container", function () {
+        // User is told that they are currently battling an opponent.
         if ($("#opponent").length) {
             $(".message").text("YOU ARE CURRENTLY IN COMBAT");
             $(".message").attr("id", "info");
             infoSound();
+        // Selected enemy is set as an opponent.
         } else {
             var opponentValue = $(this).attr("data-value");
             characters[opponentValue].role = "opponent";
@@ -143,33 +146,43 @@ $(document).ready(function () {
             $("audio#enemy-sound")[0].play();
         }
     });
-
+    
+    // Attack button
     $("#selected-hero").on("click", ".attack", function () {
+        // First determine if there is an opponent. If not, user is instructed to select an opponent.
         if ($("#opponent").attr("data-value") == null) {
             $(".message").text("PLEASE SELECT AN OPPONENT");
             $(".message").attr("id", "warning");
             infoSound();
+        // Any previous notifications are reset. Hero/Enemy values are set.
         } else {
             $(".message").attr("id", "reset");
             var heroValue = $("#hero").attr("data-value");
             var opponentValue = $("#opponent").attr("data-value");
             attack(heroValue, opponentValue);
         };
+        // Determine if there are enemies left to battle.
         checkStatus();
     });
 
+    // Attack function called.
     function attack(heroValue, opponentValue) {
         characters[heroValue].HP = characters[heroValue].HP - characters[opponentValue].CAP;
         characters[opponentValue].HP = characters[opponentValue].HP - characters[heroValue].AP;
         characters[heroValue].AP += characters[heroValue].AP;
+        // Displays current Hero and Opponent HP levels.
         $("#selected-hero > .image-container > .hp").text("HP: " + characters[heroValue].HP);
         $("#current-opponent > .image-container > .hp").text("HP: " + characters[opponentValue].HP);
+        // If hero's HP is at 0, game over. Message displayed.
         if (characters[heroValue].HP <= 0) {
             $("#selected-hero > .image-container").css("filter", "grayscale(1)");
             $(".message").text("YOU HAVE BEEN DEFEATED");
             $(".message").attr("id", "loss");
             stopMusicBed();
             lossMusic();
+            reset();
+            $(".reset").on("click", startGame());
+        // If opponent's HP is less than/equal to 0, opponent is defeated. User instructed to choose another opponent, if any.
         } else if (characters[opponentValue].HP <= 0) {
             $(".message").text("CHOOSE YOUR NEXT OPPONENT");
             $(".message").attr("id", "info");
@@ -180,6 +193,7 @@ $(document).ready(function () {
         };
     };
 
+    // Music bed played when hero is selected.
     function musicBed() {
         audio = document.getElementById("music-bed");
         audio.loop = true;
@@ -187,11 +201,13 @@ $(document).ready(function () {
         audio.currentTime = 0;
     };
 
+    // Stops music bed after win or loss.
     function stopMusicBed() {
         audio = document.getElementById("music-bed");
         audio.pause();
     }
 
+    // Win music played if user wins.
     function winMusic() {
         audio = document.getElementById("win-music");
         audio.loop = true;
@@ -200,6 +216,7 @@ $(document).ready(function () {
         audio.play();
     };
 
+    // Losing music plays if user loses.
     function lossMusic() {
         audio = document.getElementById("loss-music");
         audio.loop = true;
@@ -208,6 +225,7 @@ $(document).ready(function () {
         audio.play();
     };
 
+    // Plays sound on hero selected.
     function heroSound(j) {
         var audio = $("<audio>");
         audio.attr("id", "hero-sound");
@@ -218,6 +236,7 @@ $(document).ready(function () {
         $("#hero-sound").append(audioSource);
     };
 
+    // Plays sound of enemy selected.
     function enemySound(m) {
         var audio = $("<audio>");
         audio.attr("id", "enemy-sound");
@@ -228,19 +247,36 @@ $(document).ready(function () {
         $("#enemy-sound").append(audioSource);
     };
 
+    // Plays sound if notification is triggered
     function infoSound() {
         audio = document.getElementById("info-sound");
         audio.play();
         audio.currentTime = 0;
     };
 
+    // Function to check enemy array. If array is empty, user wins (i.e. no more enemies left.)
     function checkStatus() {
         if (enemiesArray.length === 0) {
             $(".message").text("YOU WIN");
             $(".message").attr("id", "win");
             stopMusicBed();
             winMusic();
+            reset();
+            $(".reset").on("click", startGame());
         };
     };
+
+    // Creates and sets a "Play Again?" button after win or loss.
+    function reset() {
+        var reset = $("<button>");
+        reset.attr("type", "button");
+        reset.addClass("reset");
+        reset.text("play again?");
+        $("#selected-hero").append(reset);
+    };
+
+};
+
+startGame();
 
 });

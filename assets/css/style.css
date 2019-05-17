@@ -1,154 +1,182 @@
 @font-face {
-    font-family: "starJediHollow";
-    src: url("../fonts/star_jedi_hollow.ttf") format('truetype');
+  font-family: "starJediHollow";
+  src: url("../fonts/star_jedi_hollow.ttf") format('truetype');
 }
 
 @font-face {
-    font-family: "starJedi";
-    src: url("../fonts/star_jedi.ttf") format('truetype');
+  font-family: "starJedi";
+  src: url("../fonts/star_jedi.ttf") format('truetype');
 }
 
 @font-face {
-    font-family: "episode";
-    src: url("../fonts/episode1.ttf") format('truetype');
+  font-family: "episode";
+  src: url("../fonts/episode1.ttf") format('truetype');
 }
 
 html {
-    background: url("../images/star_wars_background.jpg") no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  background: url("../images/star_wars_background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 h1 {
-    font-family: "starJedi", serif;
-    color: white;
-    font-size: 6rem;
-    text-align: center; 
-    margin: 1rem 0rem;
+  font-family: "starJedi", serif;
+  color: white;
+  font-size: 6rem;
+  text-align: center;
+  margin: 1rem 0rem;
 }
 
 h2 {
-    font-family: "starJediHollow";
-    font-size: 2rem;
-    color: white;
-    margin: 1rem;
+  font-family: "starJediHollow";
+  font-size: 2rem;
+  color: white;
+  margin: 1rem;
 }
 
 div {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .message {
   font-family: "episode", serif;
   font-size: 1.25rem;
   color: black;
-  margin: 1rem;
+  margin: .5rem;
   background-color: white;
-  display: none;
+  visibility: hidden;
   padding: 1rem;
   line-height: 1.75rem;
   font-weight: bold;
   border-radius: 5px;
   height: 30px;
-  float: left;
-  position: absolute;
-  margin-left: 285px;
-  margin-top: 10px;
+  margin-left: 1rem;
   word-spacing: 5px;
   letter-spacing: 2px;
+  display: inline-block;
 }
 
 #reset {
-  display: none;
+  visibility: hidden;
 }
 
 #win {
-  display: inline-block;
+  visibility: visible;
   background-color: #28a745;
   color: white;
 }
 
 #loss {
-  display: inline-block;
+  visibility: visible;
   background-color: #dc3545;
   color: white;
 }
 
 #warning {
-  display: inline-block;
+  visibility: visible;
   background-color: #ffc107;
   color: black;
 }
 
 #info {
-  display: inline-block;
+  visibility: visible;
   background-color: #007bff;
   color: white;
 }
 
 .characters {
-    display: flex;
+  display: flex;
 }
 
 .image-container {
-    position: relative;
+  position: relative;
 }
 
 img {
-    margin: 10px;
-    padding: 5px;
-    border: solid 2px lightskyblue;
+  margin: 10px;
+  padding: 5px;
+  border: solid 2px lightskyblue;
 }
 
 .top-left {
-    font-family: "episode", serif;
-    background-color: rgb(128, 128, 128, 0.5);
-    border-radius: 5%;
-    line-height: 30px;
-    color: white;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 5px;
-    letter-spacing: 2px;
-  }
+  font-family: "episode", serif;
+  background-color: rgb(128, 128, 128, 0.5);
+  border-radius: 5%;
+  line-height: 30px;
+  color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 5px;
+  letter-spacing: 2px;
+}
 
-  .bottom-right {
-    font-family: "episode", serif;
-    background-color: rgb(128, 128, 128, 0.5);
-    border-radius: 5%;
-    line-height: 30px;
-    color: white;
-    position: absolute;
-    bottom: 22px;
-    right: 20px;
-    padding: 5px;
-    letter-spacing: 2px;
-  }
+.bottom-right {
+  font-family: "episode", serif;
+  background-color: rgb(128, 128, 128, 0.5);
+  border-radius: 5%;
+  line-height: 30px;
+  color: white;
+  position: absolute;
+  bottom: 22px;
+  right: 20px;
+  padding: 5px;
+  letter-spacing: 2px;
+}
 
-  #hero > img {
-    border: solid 2px #95df57;
-  }
+#hero>img {
+  border: solid 2px #95df57;
+}
 
-  #enemy > img {
-    border: solid 2px #ffc107;
-  }
+#enemy>img {
+  border: solid 2px #ffc107;
+}
 
-  #opponent > img {
-    border: solid 2px #dc3545;
-  }
+#opponent>img {
+  border: solid 2px #dc3545;
+}
 
-  .attack {
-    background-color: black;
-    border: none;
-    color: #dc3545;
-    height: 50px;
-    font-family: "starJedi", serif;
-    position: relative;
-    padding: 10px;
-    border-radius: 5%;
-    font-size: 20px;
-    margin-top: 225px;
-  }
+#hero-container {
+  width: 50%;
+  float: left;
+}
+
+#opponent-container {
+  width: 50%;
+  float: right;
+}
+
+.attack {
+  background-color: black;
+  border: none;
+  color: #dc3545;
+  height: 50px;
+  font-family: "starJedi", serif;
+  position: relative;
+  padding: 10px;
+  border-radius: 5%;
+  font-size: 20px;
+  margin-top: 225px;
+}
+
+.reset {
+  background-color: #666;
+  border: none;
+  color: white;
+  height: 50px;
+  font-family: "starJedi", serif;
+  position: relative;
+  padding: 10px;
+  border-radius: 5%;
+  font-size: 20px;
+  margin: 1rem;
+  margin-top: 225px;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
