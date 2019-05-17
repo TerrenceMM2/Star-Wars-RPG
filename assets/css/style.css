@@ -34,10 +34,15 @@ h2 {
   font-size: 2rem;
   color: white;
   margin: 1rem;
+  margin-top: 0;
 }
 
 div {
   font-size: 1rem;
+}
+
+.directions {
+  height: 351px;
 }
 
 .message {
@@ -53,6 +58,7 @@ div {
   border-radius: 5px;
   height: 30px;
   margin-left: 1rem;
+  margin-bottom: 1rem;
   word-spacing: 5px;
   letter-spacing: 2px;
   display: inline-block;
@@ -173,6 +179,7 @@ img {
   font-size: 20px;
   margin: 1rem;
   margin-top: 225px;
+  margin-bottom: 0;
 }
 
 .clearfix::after {

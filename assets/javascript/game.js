@@ -8,7 +8,7 @@ $(document).ready(function () {
             name: "Luke Skywalker",
             HP: 120,
             AP: 15,
-            CAP: 10,
+            CAP: 30,
             id: "skywalker",
             role: "",
             imgSrc: "assets/images/skywalker.jpg",
@@ -18,8 +18,8 @@ $(document).ready(function () {
         {
             name: "Darth Vader",
             HP: 175,
-            AP: 25,
-            CAP: 30,
+            AP: 15,
+            CAP: 40,
             id: "darth-vader",
             role: "",
             imgSrc: "assets/images/darth_vader.jpg",
@@ -28,9 +28,9 @@ $(document).ready(function () {
 
         {
             name: "Boba Fett",
-            HP: 120,
+            HP: 140,
             AP: 15,
-            CAP: 10,
+            CAP: 30,
             id: "boba-fett",
             role: "",
             imgSrc: "assets/images/boba_fett.jpg",
@@ -39,9 +39,9 @@ $(document).ready(function () {
 
         {
             name: "Tusken Raider",
-            HP: 120,
-            AP: 15,
-            CAP: 10,
+            HP: 110,
+            AP: 10,
+            CAP: 25,
             id: "tusken-raider",
             role: "",
             imgSrc: "assets/images/tusken_raider.jpg",
@@ -289,6 +289,7 @@ $(document).ready(function () {
         $(".reset").on("click", resetGame);
     };
 
+    // Resets game by reinitializing character array with original values, removing DOM elements that were dynamically created, and resetting CSS attribute
     function resetGame() {
         stopWinMusic();
         stopLossMusic();
@@ -312,40 +313,40 @@ $(document).ready(function () {
                 name: "Luke Skywalker",
                 HP: 120,
                 AP: 15,
-                CAP: 10,
+                CAP: 30,
                 id: "skywalker",
                 role: "",
                 imgSrc: "assets/images/skywalker.jpg",
                 audioSrc: "assets/sounds/lightsaber.mp3"
             },
-
+    
             {
                 name: "Darth Vader",
                 HP: 175,
-                AP: 25,
-                CAP: 30,
+                AP: 15,
+                CAP: 40,
                 id: "darth-vader",
                 role: "",
                 imgSrc: "assets/images/darth_vader.jpg",
                 audioSrc: "assets/sounds/vader_breathing.mp3"
             },
-
+    
             {
                 name: "Boba Fett",
-                HP: 120,
+                HP: 140,
                 AP: 15,
-                CAP: 10,
+                CAP: 30,
                 id: "boba-fett",
                 role: "",
                 imgSrc: "assets/images/boba_fett.jpg",
                 audioSrc: "assets/sounds/boba_fett.mp3"
             },
-
+    
             {
                 name: "Tusken Raider",
-                HP: 120,
-                AP: 15,
-                CAP: 10,
+                HP: 110,
+                AP: 10,
+                CAP: 25,
                 id: "tusken-raider",
                 role: "",
                 imgSrc: "assets/images/tusken_raider.jpg",
