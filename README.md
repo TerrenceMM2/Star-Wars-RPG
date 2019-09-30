@@ -25,8 +25,7 @@ This Star Wars RPG game demonstates the use of JavaScript and jQuery in order to
 ### Built With
 1. HTML/CSS
 2. JavaScript
-3. [Bootstrap](https://getbootstrap.com/)
-4. [jQuery](https://jquery.com/)
+3. [jQuery](https://jquery.com/)
 
 ### Author
 * **Terrence Mahnken** - [LinkedIn](https://www.linkedin.com/in/terrencemahnken/) | [Twitter](https://twitter.com/TerrenceMahnken) | [Personal Portfolio](https://terrencemm2.github.io/)
