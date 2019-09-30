@@ -17,6 +17,9 @@ This Star Wars RPG game demonstates the use of JavaScript and jQuery in order to
 4. If your current opponent is defeated, select a new opponent to battle against.  
     * Continue to do so until all enemies have been defeated.  
   
+## Screenshot
+![Star Wars RPG Game Screenshot](../media/star-wars-rpg-screenshot.png?raw=true)
+  
 ### Glossary  
 * HP = Health Points  
 * AP = Attack Points  
