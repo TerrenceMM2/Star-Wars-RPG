@@ -1,6 +1,5 @@
-# coursework4-star-wars-rpg  
-Vanderbilt Coding Boot Camp Coursework #4: Star Wars RPG  
-Live Link: https://terrencemm2.github.io/coursework4-star-wars-rpg/  
+# Star Wars RPG
+Live Link: https://terrencemm2.github.io/Star-Wars-RPG/  
 
 ## Purpose  
 This Star Wars RPG game demonstates the use of JavaScript and jQuery in order to dynamically render content.
